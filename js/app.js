@@ -578,11 +578,11 @@ const SENHA_BLOQUEIO = "1";
 
 // Tempo do primeiro cronômetro
 // 2 horas m(1) * d(1) * h(2) * min(60) * seg(60)
-const TEMPO_INICIAL = 1 * 1 * 1 * 1 * 10;
+const TEMPO_INICIAL = 1 * 30 * 60 * 60 * 60;
 
 // Tempo do segundo cronômetro
 // 2 horas m(1) * d(1) * h(2) * min(60) * seg(60)
-const TEMPO_BLOQUEIO = 1  *  1  *  1  *  20;
+const TEMPO_BLOQUEIO = 1  *  3  *  60  *  60;
 
 /*3. CONTROLE DOS CRONÔMETROS*/
 // Guarda intervalo do primeiro cronômetro
