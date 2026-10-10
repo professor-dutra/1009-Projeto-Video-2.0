@@ -465,20 +465,15 @@ controleVelocidade.addEventListener("change", () => {
 async function obterArquivo(item){
     if(item.handle){
         try{
-            let permissao =
-                await item.handle.queryPermission({ mode: "read" });
-
+            let permissao = await item.handle.queryPermission({ mode: "read" });
             if(permissao !== "granted"){
-                permissao =
-                    await item.handle.requestPermission({ mode: "read" });
+                permissao = await item.handle.requestPermission({ mode: "read" });
             }
-
             if(permissao !== "granted"){
+                console.warn("Permissão negada pelo usuário para o arquivo:", item.nomePlaylist);
                 return null;
             }
-
             return await item.handle.getFile();
-
         }catch(erro){
             console.error("Erro ao acessar o arquivo:", erro);
             alert(
@@ -488,8 +483,14 @@ async function obterArquivo(item){
             return null;
         }
     }
-
-    return item.arquivo || null;
+  
+    // CENÁRIO 2: Celular / Web (Arquivo binário vindo do IndexedDB)
+    if (item.arquivo) {
+        // Se veio do IndexedDB após reiniciar, ele mantém as propriedades do arquivo binário (Blob)
+        return item.arquivo; 
+    }
+  
+  return null;
 }
 
 /*09161711-Endereço temporário do vídeo atual*/
@@ -1171,15 +1172,12 @@ seletorPasta.addEventListener("change", () => {
     /* Adiciona os vídeos à pasta */
     videosSelecionados.forEach((arquivo) => {
         if(arquivo.type.startsWith("video/")){
-
             const videoJaExiste = pastaSelecionada.videos.some(
                 (item) => item.nome === arquivo.name
             );
-
             if(videoJaExiste){
                 return;
             }
-
             pastaSelecionada.videos.push({
                 id: Date.now() + Math.random(),
                 nome: arquivo.name,
