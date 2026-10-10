@@ -614,8 +614,14 @@ video.volume = 0.2;
 // O vídeo começa pausado
 video.pause();
 
-// Coloca o cursor no campo Usuário
-campoUsuario.focus();
+/* Define o estado inicial conforme o dispositivo */
+if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+    // No celular, esconde a tela de Login
+    telaLogin.style.display = "none";
+} else {
+    // No computador, mantém o Login e o foco no campo Usuário
+    campoUsuario.focus();
+}
 
 /*5. LOGAR*/
 btnLogin.addEventListener("click", () => {
