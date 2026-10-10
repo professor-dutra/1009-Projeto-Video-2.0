@@ -574,7 +574,7 @@ const btnDesbloquear = document.querySelector("#btnDesbloquear");
 
 /*2. CONFIGURAÇÕES*/
 // Senha utilizada para cancelar o bloqueio
-const SENHA_BLOQUEIO = "admin";
+const SENHA_BLOQUEIO = "1";
 
 // Tempo do primeiro cronômetro
 // 2 horas m(1) * d(1) * h(2) * min(60) * seg(60)
